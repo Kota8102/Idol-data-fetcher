@@ -1,0 +1,54 @@
+service: get-event-yosugala
+
+frameworkVersion: '3'
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: ap-northeast-1
+  stackTags:
+    Name : ${self:custom.var.myname}
+    Environment : ${self:custom.var.environment}
+    SystemName : ${self:custom.var.mysystemname}
+    ApplicationRole : lambda
+
+functions:
+  hello:
+    name : ${self:custom.var.myname}
+    handler: handler.hello
+    role: ${env:Lambda_Role}
+    timeout: 120
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+
+    events:
+    - schedule: cron(0 0 * * ? *)
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer: true
+  var:
+    myname: ${self:custom.var.mysystemname}-${self:custom.var.environment}-${self:service}-lambda
+    environment: ${opt:stage, 'dev'}
+    mysystemname : ${file(./conf/settings.yml):SystemName}
+
+package:
+  patterns:
+    - "!.vscode/**"
+    - "!.git/**"
+    - "!.gitignore"
+    - "!.serverless"
+    - "!.serverless/**"
+    - "!README.md"
+    - "!package*.json"
+    - "!requirements.txt"
+    - "!node_modules/**"
+    - "!__pycache__"
+    - "!yarn.lock"
+    - "!conf/**"

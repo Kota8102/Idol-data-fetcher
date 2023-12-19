@@ -26,6 +26,7 @@ serverless plugin install -n serverless-python-requirements
 ### デプロイ方法
 
 外部モジュールを利用する場合は、requirements.txtを作成する
+
 ```bash
 pip freeze > requirements.txt
 ```
@@ -45,6 +46,12 @@ sls remove
 
 ## 管理しているLambda
 
-| Lambda Function Name | Execution Time |
-|----------------------|----------------|
-| get-event-kolkol     |           |
+### イベント情報の取得 (S3への保存)
+| Lambda Function Name | 概要                                    |
+|----------------------|----------------------------------------|
+| get-event-kolkol     | Kolokolのホームページからイベント情報を取得する  |
+| get-event-yosugala   | yosugalaのホームページからイベント情報を取得する |
+
+### イベント情報の登録 (Dynamoへの登録)
+
+### APIの作成 (API Gateway)
