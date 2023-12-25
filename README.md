@@ -1,5 +1,17 @@
-# Serverless Frameworkを使ってみる
+# idolcalendarのAWSインフラについて
 
+## 概要図
+
+以下が[Idol Calendar](https://idolcalendar.info/)のAWSインフラの概要図である。
+
+![アーキテクチャ図](documents/images/アーキテクチャ図.drawio.svg)
+
+
+<!-- ### Severless Frameworkの使い方
+
+#### インストール方法
+
+```bash
 ## 外部ライブラリの利用方法[Title](https://developer.kaizenplatform.com/entry/2021/03/30/150000)
 
 ```bash
@@ -10,7 +22,7 @@ serverless plugin install -n serverless-python-requirements
 pip freeze > requirements.txt
 ```
 
-## 使い方
+### 使い方
 
 サービスの作成方法
 ```bash
@@ -42,7 +54,7 @@ sls invoke -f hello
 削除方法
 ```bash
 sls remove
-```
+``` -->
 
 ## 管理しているLambda
 
