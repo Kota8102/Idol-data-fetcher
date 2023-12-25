@@ -1,60 +1,97 @@
-# idolcalendarのAWSインフラについて
+# Idol Calendar
 
-## 概要図
+たくさんのライブを抱える方々に向けて、複数のアイドルの
+ライブの予定を1つのカレンダーにまとめて表示することができるサービスです。
 
-以下が[Idol Calendar](https://idolcalendar.info/)のAWSインフラの概要図である。
+## URL
+
+[Idol Calendar](https://idol-calendar.info)
+
+## 使用技術
+
+- React
+- TypeScript
+- Python
+- Serverless Framework
+- AWS
+  - Lambda
+  - API Gateway
+  - DynamoDB
+  - S3
+
+
+## インフラ構成図
 
 ![アーキテクチャ図](documents/images/アーキテクチャ図.drawio.svg)
 
 
-<!-- ### Severless Frameworkの使い方
+## 使い方
 
-#### インストール方法
+### Serverless Framework
 
-```bash
-## 外部ライブラリの利用方法[Title](https://developer.kaizenplatform.com/entry/2021/03/30/150000)
+#### Serverless Frameworkのプラグインのインストール方法
+
+以下のコマンドを実行することで、Pythonの外部ライブラリを利用することができる
 
 ```bash
 serverless plugin install -n serverless-python-requirements
 ```
 
-```bash
-pip freeze > requirements.txt
-```
+#### Serverless Frameworkのサービスの作成方法
 
-### 使い方
+以下のコマンドを実行する
 
-サービスの作成方法
 ```bash
 sls create --template aws-python3 --path ディレクトリ名
 ```
 
 Pythonの外部ライブラリを利用する場合は、以下のコマンドを実行する
+
 ```bash
 serverless plugin install -n serverless-python-requirements
 ```
 
+### Serverless Frameworkを用いたデプロイ方法
 
-### デプロイ方法
+0. 外部モジュールを利用する場合は、requirements.txtを作成する
 
-外部モジュールを利用する場合は、requirements.txtを作成する
+    ```bash
+    pip freeze > requirements.txt
+    ```
+
+1. dev環境へとデプロイする
+
+    ```bash
+    sls deploy --stage dev/prod 
+    ```
+
+2. デプロイしたLambdaを実行する
+
+    ```bash
+    sls invoke -f hello
+    ```
+
+3. 問題なれば、dev環境を削除する
+
+    ```bash
+    sls remove --stage dev
+    ```
+
+4. prod環境へとデプロイする
+
+    ```bash
+    sls deploy --stage prod
+    ```
+
+## Note
+
+### デプロイ時にエラーが発生した場合
+
+`--verbose`オプションをつけることで、詳細なエラーが表示される
 
 ```bash
-pip freeze > requirements.txt
+sls deploy --stage dev --verbose
 ```
-
-```bash
-sls deploy --stage dev/prod --verbose(デバックあり)
-```
-
-```bash
-sls invoke -f hello
-```
-
-削除方法
-```bash
-sls remove
-``` -->
 
 ## 管理しているLambda
 
